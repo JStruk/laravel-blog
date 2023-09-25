@@ -2,32 +2,30 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BlogPostResource\Pages;
-use App\Filament\Resources\BlogPostResource\RelationManagers;
-use App\Models\BlogPost;
+use App\Filament\Resources\BlogPostCategoryResource\Pages;
+use App\Filament\Resources\BlogPostCategoryResource\RelationManagers;
 use App\Models\BlogPostCategory;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
+use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BlogPostResource extends Resource
+class BlogPostCategoryResource extends Resource
 {
-    protected static ?string $model = BlogPost::class;
+    protected static ?string $model = BlogPostCategory::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    public BlogPostCategory $category;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('title')->columnSpan('full'),
-                Select::make('blog_post_category_id')->relationship(name: 'category', titleAttribute: 'name'),
-                RichEditor::make('contents')->columnSpan('full'),
+                TextInput::make('name')->columnSpan('full'),
             ]);
     }
 
@@ -35,9 +33,7 @@ class BlogPostResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
-                TextColumn::make('category.name'),
-                TextColumn::make('contents')->markdown(),
+                TextColumn::make('name'),
             ])
             ->filters([
                 //
@@ -54,20 +50,20 @@ class BlogPostResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-
+    
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-
+    
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListBlogPosts::route('/'),
-            'create' => Pages\CreateBlogPost::route('/create'),
-            'edit'   => Pages\EditBlogPost::route('/{record}/edit'),
+            'index' => Pages\ListBlogPostCategories::route('/'),
+            'create' => Pages\CreateBlogPostCategory::route('/create'),
+            'edit' => Pages\EditBlogPostCategory::route('/{record}/edit'),
         ];
-    }
+    }    
 }
