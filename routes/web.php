@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\BlogPost;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/blog-posts', function () {
+    return Inertia::render('BlogPosts', ['blogPosts' => BlogPost::all()]);
+})->name('blog-posts');
