@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\BlogPostCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,13 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word,
-            'contents' => $this->faker->sentence,
+            'title' => $this->faker->sentence(5),
+            'contents' => function () {
+                return collect($this->faker->paragraphs(3))->map(function ($paragraph) {
+                    return "<p>{$paragraph}</p><br>";
+                })->implode('');
+            },
+            'blog_post_category_id' => BlogPostCategory::factory(),
         ];
     }
 }

@@ -1,7 +1,9 @@
 <template>
-    <div class="flex flex-col w-full justify-center">
-        <div class="pt-4" v-for="post in blogPosts">
-            <BlogPostsComponent :blogPost="post" />
+    <div class="flex w-full justify-center">
+        <div class="w-1/2">
+            <div class="pt-4" v-for="post in blogPosts">
+                <BlogPostsComponent :blogPost="post" />
+            </div>
         </div>
     </div>
 </template>

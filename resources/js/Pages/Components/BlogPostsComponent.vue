@@ -8,20 +8,18 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex w-full justify-center">
-        <div class="border border-black p-4">
-            <div class="flex mx-auto space-x-4">
-                <div>
+    <div class="flex-grow w-full justify-center">
+        <div class="border border-black rounded shadow-md border-gray-500 p-4 cursor-pointer hover:bg-gray-100">
+            <div class="flex mx-auto space-t-4 justify-between">
+                <h2 class="text-2xl tracking-wide">
                     {{ blogPost.title }}
-                </div>
-                <div>
-                    {{ blogPost.created_at }}
-                </div>
+                </h2>
+                <span class="text-gray-700">
+                    {{ blogPost.created_diff_for_humans }}
+                </span>
             </div>
-            <hr class="h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-400">
-            <div class="pt-4">
-                {{ blogPost.contents }}
-            </div>
+            <hr class="mx-auto my-y border-1 border-gray-400 md:my-3 dark:bg-gray-700">
+            <div class="pt-4" v-html="blogPost.contents"></div>
         </div>
     </div>
 </template>

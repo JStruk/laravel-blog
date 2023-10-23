@@ -10,9 +10,8 @@ return new class extends Migration
     {
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
-
             $table->string('title');
-            $table->string('contents');
+            $table->longText('contents');
             $table->foreignId('blog_post_category_id')
                 ->constrained('blog_post_categories')
                 ->cascadeOnDelete();
