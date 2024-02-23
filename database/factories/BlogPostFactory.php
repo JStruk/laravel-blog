@@ -18,7 +18,9 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(5),
+            'title' => 'title: ' . $this->faker->sentence(8),
+            'subtitle' => $this->faker->sentence(5),
+            'author' => $this->faker->name,
             'contents' => function () {
                 return collect($this->faker->paragraphs(3))->map(function ($paragraph) {
                     return "<p>{$paragraph}</p><br>";

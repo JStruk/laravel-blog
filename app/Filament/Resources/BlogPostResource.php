@@ -26,8 +26,12 @@ class BlogPostResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')->columnSpan('full'),
+                TextInput::make('subtitle')->columnSpan('full'),
+                TextInput::make('author')->columnSpan('half'),
                 Select::make('blog_post_category_id')->relationship(name: 'category', titleAttribute: 'name'),
-                RichEditor::make('contents')->columnSpan('full'),
+                RichEditor::make('contents')
+                    ->fileAttachmentsDisk('public')
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -36,6 +40,8 @@ class BlogPostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
+                TextColumn::make('subtitle'),
+                TextColumn::make('author'),
                 TextColumn::make('category.name'),
                 TextColumn::make('contents')->markdown(),
             ])
