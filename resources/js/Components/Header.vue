@@ -1,17 +1,48 @@
 <template>
-    <div class="flex items-center bg-gray-800 p-4 justify-between">
-        <Link href="/blog-posts" class="flex items-center text-3xl text-white h-12 mr-8 sm:px-12">Blog Website</Link>
-        <ul class="flex list-none m-0 p-0 items-center sm:px-12">
-            <li class="mr-4">
-                <a href="/" class="text-white no-underline hover:text-gray-300">Home</a>
-            </li>
-            <li class="left-1.5 hover:text-gray-500">
-                <a href="/blog-posts" class="text-white no-underline hover:text-gray-300">Blog Posts</a>
-            </li>
-        </ul>
+    <div class="navbar bg-base-100 border border-base-300">
+        <div class="navbar-start">
+            <Link class="btn btn-ghost">Homepage</Link>
+            <Link href="/blog-posts" class="btn btn-ghost">Blog Posts</Link>
+            <Link class="btn btn-ghost">Portfolio</Link>
+        </div>
+        <div class="navbar-center">
+            <a class="btn btn-ghost text-xl">Justin Struk Blog</a>
+        </div>
+        <div class="navbar-end">
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li>
+                        <details id="theme-details">
+                            <summary>
+                                Theme
+                            </summary>
+                            <ul class="p-2 bg-base-100 rounded-t-none">
+                                <li v-for="theme in themes">
+                                    <a @click="onThemeChange(theme.value)">{{ theme.label }}</a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
+import {onMounted, ref} from 'vue'
+import {themeChange} from 'theme-change'
+import themes from '../../fixtures/themes.json'
+
+onMounted(() => {
+    themeChange(false)
+});
+
+function onThemeChange(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('theme-details').removeAttribute('open');
+
+    localStorage.setItem('theme', theme);
+}
 </script>

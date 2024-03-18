@@ -14,10 +14,13 @@ Route::get('/blog-posts', function () {
             return [
                 'id' => $post->id,
                 'title' => $post->title,
+                'subtitle' => $post->subtitle,
                 'contents' => $post->contents,
                 'created_at' => $post->created_at,
                 'updated_at' => $post->updated_at,
                 'created_diff_for_humans' => $post->created_at->diffForHumans(),
+                'author' => $post->author,
+                'category' => $post->category->name
             ];
         })
     ]);
