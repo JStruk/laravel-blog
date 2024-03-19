@@ -1,16 +1,16 @@
 <template>
     <div class="navbar bg-base-100 border border-base-300">
         <div class="navbar-start">
-            <Link class="btn btn-ghost">Homepage</Link>
-            <Link href="/blog-posts" class="btn btn-ghost">Blog Posts</Link>
-            <Link class="btn btn-ghost">Portfolio</Link>
+            <a href="https://jstruk.dev" target="_blank" class="btn btn-ghost">Homepage</a>
+            <Link href="/" class="btn btn-ghost">Blog Posts</Link>
+            <Link href="https://jstruk.dev/projects" class="btn btn-ghost">Portfolio</Link>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost text-xl">Justin Struk Blog</a>
+            <Link href="/" class="btn btn-ghost text-xl">Justin Struk Blog</Link>
         </div>
         <div class="navbar-end">
             <div class="flex-none">
-                <ul class="menu menu-horizontal px-1">
+                <ul class="menu menu-horizontal px-1 mr-6">
                     <li>
                         <details id="theme-details">
                             <summary>

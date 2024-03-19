@@ -3,17 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogPostCategoryResource\Pages;
-use App\Filament\Resources\BlogPostCategoryResource\RelationManagers;
 use App\Models\BlogPostCategory;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BlogPostCategoryResource extends Resource
 {
@@ -50,14 +46,14 @@ class BlogPostCategoryResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -65,5 +61,5 @@ class BlogPostCategoryResource extends Resource
             'create' => Pages\CreateBlogPostCategory::route('/create'),
             'edit' => Pages\EditBlogPostCategory::route('/{record}/edit'),
         ];
-    }    
+    }
 }

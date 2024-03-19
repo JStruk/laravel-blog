@@ -1,8 +1,8 @@
-<script setup>
-import Header from '../Components/Header.vue';
-</script>
-
 <template>
-    <Header />
+    <NavBar />
     <slot />
 </template>
+
+<script setup>
+import NavBar from "../Components/NavBar.vue";
+</script>

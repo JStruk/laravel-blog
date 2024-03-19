@@ -16,7 +16,7 @@
         <div class="border-b"></div>
 
         <!-- Blog Content -->
-        <div class="p-4 card-body">
+        <div class="p-4 card-body bg-base-300">
             <h1 class="text-2xl md:text-5xl mb-2 mt-4">{{ blogPost.title }}</h1>
             <h2 class="text-xl md:text-2xl italic mb-4">{{ blogPost.subtitle }}</h2>
             <hr class="h-px my-8 bg-gray-300 border-0 dark:bg-gray-400">
