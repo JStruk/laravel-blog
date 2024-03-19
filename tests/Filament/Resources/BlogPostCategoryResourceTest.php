@@ -41,4 +41,31 @@ describe('Blog Post Category Filament Resource', function () {
             'name' => $blogPostCategory->name,
         ]);
     });
+
+    it('can list blog post categories', function () {
+        $categories = BlogPostCategory::factory()->count(10)->create();
+
+        livewire(BlogPostCategoryResource\Pages\ListBlogPostCategories::class)
+            ->assertCanSeeTableRecords($categories);
+    });
+
+    it('can edit a blog post category', function () {
+        $category = BlogPostCategory::factory()->create([
+            'name' => 'some-category',
+        ]);
+
+        $newName = fake()->name;
+
+        livewire(BlogPostCategoryResource\Pages\EditBlogPostCategory::class, [$category->id])
+            ->fillForm([
+                'name' => $newName,
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas(BlogPostCategory::class, [
+            'id' => $category->id,
+            'name' => $newName,
+        ]);
+    });
 });

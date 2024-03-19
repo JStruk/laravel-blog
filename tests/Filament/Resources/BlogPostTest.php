@@ -49,4 +49,39 @@ describe('Blog Post', function () {
             'contents' => $blogPost->contents
         ]);
     });
+
+    it('can list blog posts', function () {
+        $posts = BlogPost::factory()->count(10)->create();
+
+        livewire(BlogPostResource\Pages\ListBlogPosts::class)
+            ->assertCanSeeTableRecords($posts);
+    });
+
+    it('can edit a blog post', function () {
+        $blogPost = BlogPost::factory()->create([
+            'title' => 'some-title',
+            'contents' => 'some-content',
+            'author' => 'some-author'
+        ]);
+
+        $newTitle = fake()->title;
+        $newContents = fake()->sentence;
+        $newAuthor = fake()->name;
+
+        livewire(BlogPostResource\Pages\EditBlogPost::class, [$blogPost->id])
+            ->fillForm([
+                'title' => $newTitle,
+                'contents' => $newContents,
+                'author' => $newAuthor,
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas(BlogPost::class, [
+            'id' => $blogPost->id,
+            'title' => $newTitle,
+            'contents' => $newContents,
+            'author' => $newAuthor
+        ]);
+    });
 });
